@@ -34,7 +34,7 @@
         }
         public static IGenLogger GetLogger(string name)
         {
-            return CreateLogTraceSource(name);
+            return CreateGenLogger(name);
         }
 
         #endregion
@@ -117,7 +117,7 @@
 
         #region private members
         
-        private static IGenLogger CreateLogTraceSource(string name)
+        private static IGenLogger CreateGenLogger(string name)
         {
             //TODO: This line couple with LogCastleCore too much
             var ts = new LogCastleCore(name);
