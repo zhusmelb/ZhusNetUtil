@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.0;net45;net40</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Company>zhusmelb.com</Company>
+    <Product>ZhusUtil</Product>
+    <AssemblyTitle>Zhus .NET Utility</AssemblyTitle>
+    <Description>Utility components for .NET development convenience</Description>
+    <Version>0.1.0-beta.1</Version>
+    <CurrentYear>$([System.DateTime]::Now.ToString("yyyy"))</CurrentYear>
+    <Copyright>Copyright © $(CurrentYear) zhusmelb.com</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.2.1" />
+  </ItemGroup>
+
+</Project>
