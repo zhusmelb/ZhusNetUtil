@@ -1,11 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.0;net45;net40</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.0;net40;net452;net471</TargetFrameworks>
   </PropertyGroup>
 
+  <!-- Nuget package meta data -->
   <PropertyGroup>
-    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <PackageId>com.zhusmelb.BaseUtil</PackageId>
+    <Author>Yu Zhu</Author>
+    <Company>zhusmelb.com</Company>
+    <Title>.NET basic utility</Title>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <!-- Properties for GenerateAssemblyInfo target -->
+  <PropertyGroup>
+    <IncludeSourceRevisionInInformationalVersion>true</IncludeSourceRevisionInInformationalVersion>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>zhusmelb.com</Company>
     <Product>ZhusUtil</Product>
@@ -13,12 +23,11 @@
     <Description>Utility components for .NET development convenience</Description>
     <CurrentYear>$([System.DateTime]::Now.ToString("yyyy"))</CurrentYear>
     <Copyright>Copyright © $(CurrentYear) zhusmelb.com</Copyright>
-    <Version>0.1.0-beta.1</Version>
+    <Version>0.1.0-alpha.1</Version> 
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.2.1" />
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
   </ItemGroup>
 
 </Project>
