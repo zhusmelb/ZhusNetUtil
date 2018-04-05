@@ -49,11 +49,11 @@
             log.Log(LogLevel.Debug, message, args);
         }
 
-        public static void Debug<TObj>(this IGenLogger log, Predicate<IEnumerable<TObj>> pred, IEnumerable<TObj> colls,
+        public static void Debug<TObj>(this IGenLogger log, IEnumerable<TObj> colls, Predicate<IEnumerable<TObj>> pred, 
             Func<TObj, string> msgFunc)
             where TObj : class
         {
-            log.AddCollectionIf(LogLevel.Debug, pred, colls, msgFunc);    
+            log.CollectionIf(LogLevel.Debug, colls, pred, msgFunc);    
         }
 
         public static void Error(this IGenLogger log, string message, params object[] args) {
@@ -66,6 +66,19 @@
             log.Flush();            
         }
 
+        #pragma warning disable CS0618
+        public static void StackTrace(this IGenLogger log, LogLevel level, string prompt) {
+            log.AddStackTrace(level, prompt);
+        }
+
+        public static void CollectionIf<TObj>(this IGenLogger log, LogLevel level,  
+                IEnumerable<TObj> colls, Predicate<IEnumerable<TObj>> pred, Func<TObj, string> msgFunc)
+                where TObj : class
+        {
+            log.AddCollectionIf(level, pred, colls, msgFunc);
+        }
+        #pragma warning restore CS0618
+
         public static void Add(this IGenLogger log, string sLogMessage, params object[] args)
         {
             log.Add(LogLevel.Verbose, sLogMessage, args);
@@ -75,6 +88,7 @@
             log.Log(level, sLogMessage, args);
         }
 
+        [Obsolete("AddCollectionIf is deprecated, please use CollectionIf and its wrappers of different level instead.")]
         public static void AddCollectionIf<TObjs, TObj>
             (this IGenLogger log, LogLevel level, Predicate<TObjs> pred, TObjs colls, Func<TObj, string> msgFunc)
             where TObjs : IEnumerable<TObj>
@@ -92,6 +106,7 @@
             }
         }
 
+        [Obsolete("AddStackTrace is deprecated, please use StackTrace instead.")]
         public static void AddStackTrace(this IGenLogger log, LogLevel level, string prompt)
         {
             log.Add(level, FormatLogMessage("{0} stack trace: \n{1}", () => prompt, () => new StackTrace()));
