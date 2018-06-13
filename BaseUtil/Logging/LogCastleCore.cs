@@ -3,7 +3,10 @@
     using System;
     using System.Text;
     using Castle.Core.Logging;
-
+    
+    /// <summary>
+    /// Leverage Castle.Log
+    /// </summary>
     internal class LogCastleCore : IGenLogger
     {
         private readonly Lazy<ILogger> _logger;
@@ -156,7 +159,7 @@
 
     internal static class CastleLogHelper
     {
-        public static LogLevel AsMezyLogLevel(this LoggerLevel level)
+        public static LogLevel AsLogLevel(this LoggerLevel level)
         {
             var newLevel = LogLevel.Off;
 

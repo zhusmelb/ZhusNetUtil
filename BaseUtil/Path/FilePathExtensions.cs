@@ -1,5 +1,4 @@
-﻿
-namespace com.zhusmelb.Util.Path
+﻿namespace com.zhusmelb.Util.Path
 {
     using System;
     using System.IO;

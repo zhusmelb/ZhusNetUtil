@@ -12,7 +12,6 @@
         public virtual string AppBase
         {
             get { return AppDomain.CurrentDomain.BaseDirectory; }
-
         }
 
         public virtual string AppDataBase
