@@ -2,25 +2,25 @@
 {
     using System;
     using System.Text;
-    using Castle.Core.Logging;
-    
+    using CastleLog = Castle.Core.Logging;
+
     /// <summary>
     /// Leverage Castle.Log
     /// </summary>
-    internal class LogCastleCore : IGenLogger
+    internal class LogCastleCore : ILogger
     {
-        private readonly Lazy<ILogger> _logger;
+        private readonly Lazy<CastleLog.ILogger> _logger;
         private readonly string _name;
 
         public LogCastleCore(string name) {
             _name = name;
-            _logger = new Lazy<ILogger>(initTraceLogger, true);    
+            _logger = new Lazy<CastleLog.ILogger>(initTraceLogger, true);    
         }
 
         // Lazy construction a ILogger
-        private ILogger initTraceLogger()
+        private CastleLog.ILogger initTraceLogger()
         {
-            return new TraceLoggerFactory().Create(_name);
+            return new CastleLog.TraceLoggerFactory().Create(_name);
         }
 
         #region IGenLogger implementation
@@ -31,19 +31,19 @@
             var b = false;
             switch (newLevel)
             {
-                case LoggerLevel.Fatal:
+                case CastleLog.LoggerLevel.Fatal:
                     b = logger.IsFatalEnabled;
                     break;
-                case LoggerLevel.Error:
+                case CastleLog.LoggerLevel.Error:
                     b = logger.IsErrorEnabled;
                     break;
-                case LoggerLevel.Warn:
+                case CastleLog.LoggerLevel.Warn:
                     b = logger.IsWarnEnabled;
                     break;
-                case LoggerLevel.Info:
+                case CastleLog.LoggerLevel.Info:
                     b = logger.IsInfoEnabled;
                     break;
-                case LoggerLevel.Debug:
+                case CastleLog.LoggerLevel.Debug:
                     b = logger.IsDebugEnabled;
                     break;
             }
@@ -56,19 +56,19 @@
             var logger = _logger.Value;
             switch (newLevel)
             {
-                case LoggerLevel.Fatal:
+                case CastleLog.LoggerLevel.Fatal:
                     logger.Fatal(message);
                     break;
-                case LoggerLevel.Error:
+                case CastleLog.LoggerLevel.Error:
                     logger.Error(message);
                     break;
-                case LoggerLevel.Warn:
+                case CastleLog.LoggerLevel.Warn:
                     logger.Warn(message);
                     break;
-                case LoggerLevel.Info:
+                case CastleLog.LoggerLevel.Info:
                     logger.Info(message);
                     break;
-                case LoggerLevel.Debug:
+                case CastleLog.LoggerLevel.Debug:
                     logger.Debug(message);
                     break;
             }
@@ -80,19 +80,19 @@
             var logger = _logger.Value;
             switch (newLevel)
             {
-                case LoggerLevel.Fatal:
+                case CastleLog.LoggerLevel.Fatal:
                     logger.FatalFormat(sLogMessage, args);
                     break;
-                case LoggerLevel.Error:
+                case CastleLog.LoggerLevel.Error:
                     logger.ErrorFormat(sLogMessage, args);
                     break;
-                case LoggerLevel.Warn:
+                case CastleLog.LoggerLevel.Warn:
                     logger.WarnFormat(sLogMessage, args);
                     break;
-                case LoggerLevel.Info:
+                case CastleLog.LoggerLevel.Info:
                     logger.InfoFormat(sLogMessage, args);
                     break;
-                case LoggerLevel.Debug:
+                case CastleLog.LoggerLevel.Debug:
                     logger.DebugFormat(sLogMessage, args);
                     break;
             }
@@ -159,28 +159,28 @@
 
     internal static class CastleLogHelper
     {
-        public static LogLevel AsLogLevel(this LoggerLevel level)
+        public static LogLevel AsLogLevel(this CastleLog.LoggerLevel level)
         {
             var newLevel = LogLevel.Off;
 
             switch (level)
             {
-                case LoggerLevel.Off:
+                case CastleLog.LoggerLevel.Off:
                     newLevel = LogLevel.Off;
                     break;
-                case LoggerLevel.Fatal:
+                case CastleLog.LoggerLevel.Fatal:
                     newLevel = LogLevel.Critical;
                     break;
-                case LoggerLevel.Error:
+                case CastleLog.LoggerLevel.Error:
                     newLevel = LogLevel.Error;
                     break;
-                case LoggerLevel.Warn:
+                case CastleLog.LoggerLevel.Warn:
                     newLevel = LogLevel.Warning;
                     break;
-                case LoggerLevel.Info:
+                case CastleLog.LoggerLevel.Info:
                     newLevel = LogLevel.Info;
                     break;
-                case LoggerLevel.Debug:
+                case CastleLog.LoggerLevel.Debug:
                     newLevel = LogLevel.Debug;
                     break;
 
@@ -188,29 +188,29 @@
             return newLevel;
         }
 
-        public static LoggerLevel AsLoggerLevel(this LogLevel level)
+        public static CastleLog.LoggerLevel AsLoggerLevel(this LogLevel level)
         {
-            var newLevel = LoggerLevel.Off;
+            var newLevel = CastleLog.LoggerLevel.Off;
             switch (level)
             {
                 case LogLevel.Off:
-                    newLevel = LoggerLevel.Off;
+                    newLevel = CastleLog.LoggerLevel.Off;
                     break;
                 case LogLevel.Critical:
-                    newLevel = LoggerLevel.Fatal;
+                    newLevel = CastleLog.LoggerLevel.Fatal;
                     break;
                 case LogLevel.Error:
-                    newLevel = LoggerLevel.Error;
+                    newLevel = CastleLog.LoggerLevel.Error;
                     break;
                 case LogLevel.Warning:
-                    newLevel = LoggerLevel.Warn;
+                    newLevel = CastleLog.LoggerLevel.Warn;
                     break;
                 case LogLevel.Info:
-                    newLevel = LoggerLevel.Info;
+                    newLevel = CastleLog.LoggerLevel.Info;
                     break;
                 case LogLevel.Debug:
                 case LogLevel.Verbose:
-                    newLevel = LoggerLevel.Debug;
+                    newLevel = CastleLog.LoggerLevel.Debug;
                     break;
             }
             return newLevel;

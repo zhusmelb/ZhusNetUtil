@@ -20,7 +20,7 @@ namespace com.zhusmelb.Util.Logging
     /// will make it easier to change the logging framework.</item>
     /// </list>
     /// </remarks>
-    public interface IGenLogger : IDisposable
+    public interface ILogger : IDisposable
     {
         bool Loggable(LogLevel eLogLevel);
         void Flush();
