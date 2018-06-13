@@ -7,7 +7,7 @@
     /// <summary>
     /// Leverage Castle.Log
     /// </summary>
-    internal class LogCastleCore : ILogger
+    internal sealed class LogCastleCore : ILogger
     {
         private readonly Lazy<CastleLog.ILogger> _logger;
         private readonly string _name;
@@ -18,12 +18,16 @@
         }
 
         // Lazy construction a ILogger
+        // TOOD: Implement with IoC container 
+        // In this method, we should ask IoC container for a 
+        // CastleLog.ILoggerFactory instance to create CastleLog.ILogger
+        // object.
         private CastleLog.ILogger initTraceLogger()
         {
             return new CastleLog.TraceLoggerFactory().Create(_name);
         }
 
-        #region IGenLogger implementation
+        #region ILogger implementation
 
         public bool Loggable(LogLevel eLogLevel) {
             var newLevel = eLogLevel.AsLoggerLevel();
@@ -74,7 +78,6 @@
             }
             
         }
-
         public void Log(LogLevel level, string sLogMessage, params object[] args) {
             var newLevel = level.AsLoggerLevel();
             var logger = _logger.Value;
@@ -110,7 +113,6 @@
                 Log(LogLevel.Warning, "messageFunc generates exception", e);
             }
         }
-
         public void LogData(LogLevel level, byte[] data) {
             if (!Loggable(level))
                 return;
@@ -136,14 +138,12 @@
             }
             Log(level, buf.ToString());
         }
-
         public void LogError(LogLevel level, Exception e, string message) {
             if (!Loggable(level))
                 return;
             Log(level, message);
             Log(level, e.ToString());
         }
-
         public void Flush() {
            // do nothing
         }
