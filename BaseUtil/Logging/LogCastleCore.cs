@@ -20,8 +20,7 @@
         // TODO: Implement with IoC container 
         // Lazy construction a ILogger
         // In this method, we should ask IoC container for a 
-        // CastleLog.ILoggerFactory instance to create CastleLog.ILogger
-        // object.
+        // CastleLog.ILoggerFactory instance to create CastleLog.ILogger object
         private CastleLog.ILogger initTraceLogger()
         {
             return new CastleLog.TraceLoggerFactory().Create(_name);
