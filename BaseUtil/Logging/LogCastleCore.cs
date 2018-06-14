@@ -17,8 +17,8 @@
             _logger = new Lazy<CastleLog.ILogger>(initTraceLogger, true);    
         }
 
+        // TODO: Implement with IoC container 
         // Lazy construction a ILogger
-        // TOOD: Implement with IoC container 
         // In this method, we should ask IoC container for a 
         // CastleLog.ILoggerFactory instance to create CastleLog.ILogger
         // object.
