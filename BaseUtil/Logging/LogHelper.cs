@@ -5,11 +5,14 @@
     using System.Diagnostics;
     using System.Text;
 
+    using com.zhusmelb.Util.IoC;
+
     public static class LogHelper
     {
         static LogHelper()
         {
             Trace.AutoFlush = true;
+            IocHelper.BootstrapIoCContainer();
         }
 
         #region public Helper functions

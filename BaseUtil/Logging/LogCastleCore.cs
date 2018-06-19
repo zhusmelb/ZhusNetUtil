@@ -4,6 +4,8 @@
     using System.Text;
     using CastleLog = Castle.Core.Logging;
 
+    using com.zhusmelb.Util.IoC;
+
     /// <summary>
     /// Leverage Castle.Log
     /// </summary>
@@ -18,12 +20,12 @@
         }
 
         // TODO: Implement with IoC container 
-        // Lazy construction a ILogger
+        // Lazy construction an object of ILogger
         // In this method, we should ask IoC container for a 
         // CastleLog.ILoggerFactory instance to create CastleLog.ILogger object
         private CastleLog.ILogger initTraceLogger()
         {
-            return new CastleLog.TraceLoggerFactory().Create(_name);
+            return IocHelper.GetService<CastleLog.ILoggerFactory>().Create(_name);
         }
 
         #region ILogger implementation
