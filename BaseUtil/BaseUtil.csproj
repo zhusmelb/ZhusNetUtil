@@ -32,7 +32,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.2.1" />
+    <PackageReference Include="Castle.Core" Version="4.3.0" />
+    <PackageReference Include="Castle.Core-NLog" Version="4.3.0" />
     <PackageReference Include="Castle.Windsor" Version="4.1.0" />
   </ItemGroup>
 
