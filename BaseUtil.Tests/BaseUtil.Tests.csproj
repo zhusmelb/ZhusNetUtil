@@ -13,7 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ConfigFile Include=".\Logging\nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BaseUtil\BaseUtil.csproj" />
   </ItemGroup>
 
+  <Target Name="CopyConfigFiles" AfterTargets="CoreBuild">
+    <Copy SourceFiles="@(ConfigFile)" DestinationFolder="$(OutputPath)" />
+  </Target>
 </Project>
