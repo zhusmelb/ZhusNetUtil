@@ -16,16 +16,14 @@
 
         public LogCastleCore(string name) {
             _name = name;
-            _logger = new Lazy<CastleLog.ILogger>(initTraceLogger, true);    
+            _logger = new Lazy<CastleLog.ILogger>(initLogger, true);    
         }
 
         // Lazy construction an object of ILogger
-        // In this method, we should ask IoC container for a 
-        // CastleLog.ILoggerFactory instance to create CastleLog.ILogger object
-        private CastleLog.ILogger initTraceLogger()
-        {
-            return IocHelper.GetService<CastleLog.ILoggerFactory>().Create(_name);
-        }
+        // In this method, we ask IoC container for a CastleLog.ILoggerFactory
+        // instance to create CastleLog.ILogger object
+        private CastleLog.ILogger initLogger() 
+            =>IocHelper.GetService<CastleLog.ILoggerFactory>().Create(_name);
 
         #region ILogger implementation
 
