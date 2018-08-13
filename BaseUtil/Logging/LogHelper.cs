@@ -45,7 +45,7 @@
         #region ILogger extensions
 
         public static void Verbose(this ILogger log, string message, params object[] args) {
-            log.Log(LogLevel.Verbose, message, args)
+            log.Log(LogLevel.Verbose, message, args);
         }
         public static void Info(this ILogger log, string message, params object[] args) {
             log.Log(LogLevel.Info, message, args);
