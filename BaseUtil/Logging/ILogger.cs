@@ -15,9 +15,9 @@ namespace com.zhusmelb.Util.Logging
     /// a set of logging level and APIs in own control will protected any protential
     /// changes from the third party frameworks.</item>
     /// <item>Over the time, logging need arises which the third party logging 
-    /// framework choosen at may not satisfy in time. Also bugs in the third party
-    /// framework may not get fixed in time. Encapulate third party framework 
-    /// will make it easier to change the logging framework.</item>
+    /// framework choosen may not satisfy in time, as well as bugs in the third
+    /// party framework may not get fixed in time. Encapulate third party 
+    /// framework will make it easier to change the logging framework.</item>
     /// </list>
     /// </remarks>
     public interface ILogger : IDisposable
