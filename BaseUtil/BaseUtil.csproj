@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.0;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.0;net452;net462;net472</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Nuget package meta data -->
@@ -28,7 +28,7 @@
     <!-- Version property should be set by a VCS provider to include 
          tag/branch name as postfix. At this time(2018-04-05), the GitVersionTask
          still does not support .NET Core 2.0 -->
-    <Version>0.3.0-alpha.1</Version> 
+    <Version>0.3.0-alpha.2</Version> 
   </PropertyGroup>
 
   <ItemGroup>
