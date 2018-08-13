@@ -44,6 +44,9 @@
 
         #region ILogger extensions
 
+        public static void Verbose(this ILogger log, string message, params object[] args) {
+            log.Log(LogLevel.Verbose, message, args)
+        }
         public static void Info(this ILogger log, string message, params object[] args) {
             log.Log(LogLevel.Info, message, args);
         }
@@ -69,6 +72,9 @@
             log.Flush();            
         }
 
+        public static void Data(this ILogger log, byte[] data) {
+            log.LogData(LogLevel.Verbose, data);
+        }
         #pragma warning disable CS0618
         public static void StackTrace(this ILogger log, LogLevel level, string prompt) {
             log.AddStackTrace(level, prompt);
@@ -82,11 +88,13 @@
         }
         #pragma warning restore CS0618
 
+        [Obsolete("Add is deprecated, use level specified methods instead.")]
         public static void Add(this ILogger log, string sLogMessage, params object[] args)
         {
             log.Add(LogLevel.Verbose, sLogMessage, args);
         }
 
+        [Obsolete("Add is deprecated, use level specified methods instead.")]
         public static void Add(this ILogger log, LogLevel level, string sLogMessage, params object[] args) {
             log.Log(level, sLogMessage, args);
         }
@@ -115,6 +123,7 @@
             log.Add(level, FormatLogMessage("{0} stack trace: \n{1}", () => prompt, () => new StackTrace()));
         }
 
+        [Obsolete("Add is deprecated, use level specified methods instead.")]
         public static void Add(this ILogger log, LogLevel level, Func<string> msgFunc)
         {
             if (log.Loggable(level))
@@ -137,7 +146,6 @@
         
         private static ILogger CreateGenLogger(string name)
         {
-            //TODO: This line couple with LogCastleCore too much
             var ts = new LogCastleCore(name);
             return ts;
         }
