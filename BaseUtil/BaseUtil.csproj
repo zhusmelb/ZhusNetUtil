@@ -28,12 +28,12 @@
     <!-- Version property should be set by a VCS provider to include 
          tag/branch name as postfix. At this time(2018-04-05), the GitVersionTask
          still does not support .NET Core 2.0 -->
-    <Version>0.3.0-alpha.2</Version> 
+    <Version>0.4.0-alpha.1</Version> 
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.3.0" />
-    <PackageReference Include="Castle.Core-NLog" Version="4.3.0" />
+    <PackageReference Include="Castle.Core" Version="4.3.1" />
+    <PackageReference Include="Castle.Core-NLog" Version="4.3.1" />
     <PackageReference Include="Castle.Windsor" Version="4.1.0" />
   </ItemGroup>
 
