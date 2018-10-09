@@ -15,21 +15,32 @@ namespace com.zhusmelb.Util.Logging.Test
         public void Init() {
             var testContext = TestContext.CurrentContext;
             var properties = testContext.Test.Properties;
-            TestContext.Out.Write("Within test {0}, ", testContext.Test.FullName);
+            TestContext.Progress.Write("Within test {0}, ", testContext.Test.FullName);
 
             var value = properties.Get("NoNLogConfig") as string;
-            var isValueValid = value?.Equals("true", StringComparison.CurrentCultureIgnoreCase);
-            if (isValueValid.HasValue && isValueValid.Value) {
-                TestContext.WriteLine("NoNLogConfig property found \"{0}\"", value);
-                var nlogConfigFile = new FileInfo(@"./Assets/nlog.config");
-                Assert.That(nlogConfigFile.Exists, Is.True);
-                Assert.That(()=>nlogConfigFile.CopyTo("nlog.config", true), Throws.Nothing);
+            var noNLogConfig = value?.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+            TestContext.Progress.Write("noNLogConfig {0}, ", noNLogConfig);
+            if (noNLogConfig.HasValue && noNLogConfig.Value) {
+                TestContext.Progress.WriteLine("Do not copy nlog.config");
                 return;
             }
-            TestContext.WriteLine("No NoNLogConfig property found");
+            TestContext.Progress.WriteLine("Copying nlog.config...");
+            var nlogConfigFile = new FileInfo(@"./Assets/nlog.config");
+            Assert.That(nlogConfigFile.Exists, Is.True);
+            Assert.That(()=>nlogConfigFile.CopyTo("nlog.config", true), Throws.Nothing);
             return;
         }
         
+        [TearDown]
+        public void CleanUp() {
+            var nlogConfigFile = new FileInfo("nlog.config");
+            if (nlogConfigFile.Exists) {
+                Assert.That(()=>nlogConfigFile.Delete(), Throws.Nothing);
+                nlogConfigFile.Refresh();
+            }
+            Assert.That(nlogConfigFile.Exists, Is.False);
+        }
+
         [Test]
         public void TestLog() {
             var logger = LogHelper.GetLogger("TestLogger");
@@ -45,20 +56,5 @@ namespace com.zhusmelb.Util.Logging.Test
                 logger.Info("Hellow Tester!!!");
             }, Throws.Nothing);
         }
-
-        private void prepareNlogConfig(bool toCopy = true) {
-            var nlogConfigFile = new FileInfo("nlog.config");
-            if (nlogConfigFile.Exists) {
-                Assert.That(()=>nlogConfigFile.Delete(), Throws.Nothing);
-                nlogConfigFile.Refresh();
-            }
-            Assert.That(nlogConfigFile.Exists, Is.False);
-
-            if (!toCopy) return;
-            nlogConfigFile = new FileInfo(@"./Assets/nlog.config");
-            Assert.That(nlogConfigFile.Exists, Is.True);
-            Assert.That(()=>nlogConfigFile.CopyTo("nlog.config", true), Throws.Nothing);
-        }
     }
-
 }
