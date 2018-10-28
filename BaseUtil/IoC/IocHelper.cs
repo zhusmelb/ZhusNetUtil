@@ -10,7 +10,9 @@ namespace com.zhusmelb.Util.IoC
             = new WindsorContainer();
         
         public static void BootstrapIoCContainer() {
-            _iocContainer.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("nlog.config"));
+            _iocContainer.Install(
+                new IoCLoggerInstaller()
+            );
         }
 
         public static T GetService<T>() {

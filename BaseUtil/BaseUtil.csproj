@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.0;net452;net462;net472</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.1;net452;net462;net472</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Nuget package meta data -->
@@ -28,14 +28,14 @@
     <!-- Version property should be set by a VCS provider to include 
          tag/branch name as postfix. At this time(2018-04-05), the GitVersionTask
          still does not support .NET Core 2.0 -->
-    <Version>0.4.0-alpha.1</Version> 
+    <Version>1.0.0</Version> 
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.3.1" />
     <PackageReference Include="Castle.Core-NLog" Version="4.3.1" />
-    <PackageReference Include="Castle.LoggingFacility" Version="4.1.0" />
-    <PackageReference Include="Castle.Windsor" Version="4.1.0" />
+    <PackageReference Include="Castle.LoggingFacility" Version="4.1.1" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.1" />
   </ItemGroup>
 
 </Project>

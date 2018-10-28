@@ -6,11 +6,14 @@ namespace com.zhusmelb.Util.IoC
 
     using Castle.Core.Logging;
     using Castle.Services.Logging.NLogIntegration;
-    
+    using Castle.Facilities.Logging;
+
     public class IoCLoggerInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store) {
-            container.Register(Component.For<ILoggerFactory>().ImplementedBy<NLogFactory>());
+            container.AddFacility<LoggingFacility>(
+                f => f.LogUsing<NLogFactory>().ConfiguredExternally()
+            );
         }
     }
 }
